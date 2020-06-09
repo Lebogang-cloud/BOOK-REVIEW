@@ -14,7 +14,7 @@ class HomeContainer extends Component {
 
     renderItems = (books) => (
         books.list ? 
-            books.list.map( item => (
+            books.list.map(item => (
                 <BookItem {...item} key={item._id}/>
             ))
         :null
