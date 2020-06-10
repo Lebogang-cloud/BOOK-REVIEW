@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export function getBooks(limit = 10, start = 0, order = "asc", list = "") {
   const request = axios
     .get(`/api/books?limit=${limit}&skip=${start}&order=${order}`)
@@ -53,7 +54,7 @@ export function clearBookWithReviewer() {
 export function addBook(book) {
   const request = axios
     .post("/api/book", book)
-    .then((response) => response.data);
+    .then(response => response.data);
 
   return {
     type: "ADD_BOOK",
@@ -66,6 +67,36 @@ export function clearNewBook() {
     type: "CLEAR_NEWBOOK",
     payload: {},
   };
+}
+
+export function getUserPosts(userId) {
+  const request = axios.get(`/api/user_posts?user=${userId}`)
+                .then(response => response.data)
+
+  return {
+    type: 'GET_USER_POSTS',
+    payload:request
+  }
+}
+
+export function getBook(id){
+  const request = axios.get(`/api/getBook?id=${id}`)
+                .then(response => response.data);
+
+        return {
+          type:'GET_BOOK',
+          payload:request
+        }
+}
+
+export function updateBook(data){
+  const request = axios.get(`/api/book_update`,data)
+                  .then(response => response.data);
+
+      return {
+        type:'UPDATE_BOOK',
+        payload:request
+      }
 }
 
 // ==========USER==========
