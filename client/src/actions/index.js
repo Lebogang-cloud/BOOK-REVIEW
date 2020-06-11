@@ -90,13 +90,35 @@ export function getBook(id){
 }
 
 export function updateBook(data){
-  const request = axios.get(`/api/book_update`,data)
+  const request = axios.put(`/api/book_update`,data)
                   .then(response => response.data);
 
       return {
         type:'UPDATE_BOOK',
         payload:request
       }
+}
+
+export function deleteBook(id){
+  const request = axios.delete(`/api/delete_book?id=${id}`)
+                .then(response => response.data);
+
+        return {
+          type: 'DELETE_BOOK',
+          payload:request
+        }
+
+}
+
+export function clearBook(){
+  return {
+    type:'CLEAR_BOOK',
+    payload:{
+      book:null,
+      updateBook:false,
+      postDeleted:false
+    }
+  }
 }
 
 // ==========USER==========
