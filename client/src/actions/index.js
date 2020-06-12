@@ -1,6 +1,7 @@
 import axios from "axios";
 
 
+
 export function getBooks(limit = 10, start = 0, order = "asc", list = "") {
   const request = axios
     .get(`/api/books?limit=${limit}&skip=${start}&order=${order}`)
@@ -135,10 +136,41 @@ export function loginUser({ email, password }) {
 }
 
 export function auth() {
-  const request = axios.get(`/api/auth`).then((response) => response.data);
+  const request = axios.get(`/api/auth`)
+    .then((response) => response.data);
 
   return {
     type: "USER_AUTH",
     payload: request,
   };
+}
+
+export function getUsers(){
+      const request = axios.get(`/api/users`)
+                    .then(response => response.data);
+
+        return {
+          type:'GET_USER',
+          payload:request
+        }
+}
+
+export function userRegister(user,userList){
+  const request = axios.post(`/api/register`,user)
+
+  return (dispatch) =>{
+    request.then(({data})=>{
+      let users = data.success ? [...userList,data.user] :userList;
+      let response = {
+        success:data.success,
+        users
+      }
+
+      dispatch({
+        type:'USER_REGISTER',
+        payload:response
+      })
+    })
+  }
+  
 }
