@@ -33,7 +33,16 @@ class Register extends PureComponent {
     }
 
     componentWillReceiveProps(nextProps){
-        
+        if(nextProps.user.register === false) {
+            this.setState({error:'Error, try again'})
+        }else{
+            this.setState({
+                name:'',
+                lastname:'',
+                email:'',
+                password:''
+            })
+        }
 
     }
 
@@ -63,7 +72,6 @@ class Register extends PureComponent {
     )
 
     render() { 
-        console.log(this.props)
         let user =this.props.user
         return (
             <div className="rl_container">
