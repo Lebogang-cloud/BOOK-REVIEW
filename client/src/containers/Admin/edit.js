@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getBook, updateBook,clearBook, deleteBook } from '../../actions';
+import { getBook, updateBook, clearBook, deleteBook } from '../../actions';
 
 class EditBook extends PureComponent {
 

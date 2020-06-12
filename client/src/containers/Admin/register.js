@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { connect} from 'react-redux';
-import{ getUsers, userRegister } from '../../actions';
- 
+import { connect } from 'react-redux';
+import { getUsers, userRegister } from '../../actions';
+
 class Register extends PureComponent {
 
     state ={
@@ -16,26 +16,24 @@ class Register extends PureComponent {
         this.props.dispatch(getUsers())
     }
 
+
     handleInputEmail = (event) => {
         this.setState({email:event.target.value})
-    }
-
-    handleInputPassword = (event) => {
+    } 
+    handleInputPassword= (event) => {
         this.setState({password:event.target.value})
-    }
-
+    } 
     handleInputName = (event) => {
         this.setState({name:event.target.value})
-    }
-
+    } 
     handleInputLastname = (event) => {
         this.setState({lastname:event.target.value})
-    }
+    } 
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.user.register === false) {
-            this.setState({error:'Error, try again'})
-        }else{
+        if(nextProps.user.register === false){
+            this.setState({error:'Error,try again'})
+        } else{
             this.setState({
                 name:'',
                 lastname:'',
@@ -43,7 +41,6 @@ class Register extends PureComponent {
                 password:''
             })
         }
-
     }
 
     submitForm = (e) => {
@@ -55,11 +52,11 @@ class Register extends PureComponent {
             password:this.state.password,
             name:this.state.name,
             lastname:this.state.lastname
-        }),this.props.user.users)
-
+        },this.props.user.users))
+        
     }
 
-    showUsers = (user) => (
+    showUsers = (user) =>(
         user.users ? 
             user.users.map(item => (
                 <tr key={item._id}>
@@ -71,47 +68,48 @@ class Register extends PureComponent {
         :null
     )
 
-    render() { 
-        let user =this.props.user
+
+    render() {
+        let user = this.props.user;
         return (
             <div className="rl_container">
                 <form onSubmit={this.submitForm}>
                     <h2>Add user</h2>
-
+                    
                     <div className="form_element">
-                        <input 
+                        <input
                             type="text"
                             placeholder="Enter name"
                             value={this.state.name}
                             onChange={this.handleInputName}
-                       />
+                         />
                     </div>
 
                     <div className="form_element">
-                        <input 
+                        <input
                             type="text"
-                            placeholder="Enter lastname"
+                            placeholder="Enter Lastname"
                             value={this.state.lastname}
                             onChange={this.handleInputLastname}
-                       />
+                         />
                     </div>
 
                     <div className="form_element">
-                        <input 
+                        <input
                             type="email"
                             placeholder="Enter Email"
                             value={this.state.email}
                             onChange={this.handleInputEmail}
-                       />
+                         />
                     </div>
 
                     <div className="form_element">
-                        <input 
+                        <input
                             type="password"
                             placeholder="Enter Password"
                             value={this.state.password}
                             onChange={this.handleInputPassword}
-                       />
+                         />
                     </div>
 
                     <button type="submit">Add user</button>
@@ -133,15 +131,12 @@ class Register extends PureComponent {
                         <tbody>
                             {this.showUsers(user)}
                         </tbody>
-
-                    </table>    
+                    </table>
                 </div>
-                
             </div>
         );
     }
 }
- 
 function mapStateToProps(state){
     return{
         user:state.user
